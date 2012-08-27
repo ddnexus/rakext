@@ -1,0 +1,29 @@
+require 'rakext'
+
+module TopLevel
+  include Rakext::Tasks
+  prefix 'my_pref:'
+
+  desc 'this is the my_pref:task_a - args(opts)'
+  def task_a(opts)
+    print 'received arguments: '
+    p opts
+  end
+
+  module NestedNamespace
+    include Rakext::Tasks
+
+    desc 'this is the top_level:nested_namespace:task_b - args(a,b,c)'
+    def task_b(a, b, c)
+      print 'received arguments: '
+      p a, b, c
+    end
+
+  end
+end
+
+desc 'get_args task, will just echo the passed args'
+task 'get_args' do
+  print 'received arguments: '
+  p Rakext.get_args
+end

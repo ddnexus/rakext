@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+# This bin does exactly what rake does, but allows to use multiline arguments that
+# rake does not parse correctly, so we fix the collect_tasks method.
+
+begin
+  require 'rubygems'
+rescue LoadError
+end
+
+require 'rake'
+
+require 'rake/application'
+module Rake
+  class Application
+    # Fixes the RegEx that doesn't parse correctly multiline args
+    def collect_tasks
+      @top_level_tasks = []
+      ARGV.each do |arg|
+        if arg =~ /^(\w+)=(.*)$/m  # m is needed for multiline parsing
+          ENV[$1] = $2
+        else
+          @top_level_tasks << arg unless arg =~ /^-/
+        end
+      end
+      @top_level_tasks.push("default") if @top_level_tasks.size == 0
+    end
+  end
+end
+
+Rake.application.run
