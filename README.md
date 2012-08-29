@@ -4,6 +4,12 @@ Lite and powerful rake extension.
 
 Rakext allows you to create rake tasks by just writing methods. Besides, you can pass tasks arguments as ruby code, YAML or JSON strings and they will be evaluated as you expect.
 
+## Installation
+
+```sh
+$ gem install rakext
+```
+
 ## Task Usage
 
 You can define your own modules and `include Rakext::Tasks` in order to create your tasks:
