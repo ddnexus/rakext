@@ -73,7 +73,7 @@ $ rakext my_task:nested_namespace:bar JSON_ARGS='
 
 ## Try it
 
-Look at the 2 files in [test](./rakext/blob/master/test) to see how it works. You may also run `. text.sh` to try it.
+Look at the 2 files in [test](./rakext/blob/master/test) to see how it works. You may also run `. test.sh` to try it.
 
 ## Tips and tricks
 
