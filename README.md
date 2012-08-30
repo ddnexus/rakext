@@ -18,10 +18,10 @@ You can define your own modules and `include Rakext::Tasks` in order to create y
 # file 'my_tasks.rb'
 module MyTasks
   include Rakext::Tasks
-  # the default prefix would be 'my_tasks:'
-  prefix 'my_pref:'
+  # the default prefix would be 'my_tasks:', and this is how we change it
+  prefix 'new_prefix:'
 
-  desc 'this is the my_pref:foo - args(opts)'
+  desc 'this is the new_prefix:foo - args(opts)'
   def foo(opts)
     print 'received arguments: '
     p opts
@@ -52,7 +52,7 @@ Check the tasks:
 
 ```sh
 $ rake -T
-rake my_pref:foo                    # this is the my_pref:foo - args(opts)
+rake new_prefix:foo                    # this is the new_prefix:foo - args(opts)
 rake my_tasks:nested_namespace:bar  # this is the my_task:nested_namespace:bar - args(a,b,c)
 ```
 
@@ -62,11 +62,11 @@ A few examples about passing args:
 
 ```sh
 # pure rake
-$ rake my_pref:foo RUBY_ARGS='a:"foo", b: "bar"'
+$ rake new_prefix:foo RUBY_ARGS='a:"foo", b: "bar"'
 $ rake my_task:nested_namespace:bar RUBY_ARGS='{a:4,b:3}, "a", "b"'
 
 # need rakext for multiline args (rake does not parse them correctly)
-$ rakext my_pref:foo YAML_ARGS='
+$ rakext new_prefix:foo YAML_ARGS='
 ---
 :a: foo
 :b: bar
